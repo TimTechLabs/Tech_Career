@@ -1,0 +1,258 @@
+{% extends 'base.html' %}
+
+{% block title %}Tech Career Guide | Discover Your Path{% endblock %}
+
+{% block content %}
+<!-- Font Awesome & Bootstrap Icons -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+<style>
+  /* Custom Styling Enhancements */
+  .hero-section {
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #2563eb 100%);
+    color: #ffffff;
+    padding: 90px 20px 80px;
+    border-radius: 0 0 30px 30px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  }
+
+  .badge-tag {
+    background: rgba(255, 255, 255, 0.15);
+    color: #60a5fa;
+    border: 1px solid rgba(96, 165, 250, 0.3);
+    padding: 8px 18px;
+    border-radius: 50px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+
+  .hero-title {
+    font-size: 3.2rem;
+    font-weight: 800;
+    line-height: 1.2;
+    margin-top: 15px;
+  }
+
+  .hero-subtitle {
+    font-size: 1.2rem;
+    color: #cbd5e1;
+    max-width: 650px;
+    margin: 20px auto 30px;
+  }
+
+  .btn-gradient-primary {
+    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+    color: #fff;
+    font-weight: 600;
+    padding: 14px 32px;
+    border-radius: 12px;
+    border: none;
+    box-shadow: 0 4px 14px rgba(37, 99, 235, 0.4);
+    transition: all 0.3s ease;
+  }
+
+  .btn-gradient-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(37, 99, 235, 0.6);
+    color: #fff;
+  }
+
+  .btn-outline-light-custom {
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    color: #fff;
+    font-weight: 600;
+    padding: 12px 28px;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+  }
+
+  .btn-outline-light-custom:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: #fff;
+    color: #fff;
+  }
+
+  .feature-card {
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 30px 20px;
+    background: #ffffff;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+  }
+
+  .feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+  }
+
+  .icon-wrapper {
+    width: 60px;
+    height: 60px;
+    border-radius: 14px;
+    background: #eff6ff;
+    color: #2563eb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    margin: 0 auto 20px;
+  }
+
+  .stat-card {
+    background: #f8fafc;
+    border-radius: 16px;
+    padding: 25px;
+    text-align: center;
+  }
+
+  .stat-number {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: #2563eb;
+  }
+</style>
+
+<!-- 1. HERO SECTION -->
+<section class="hero-section text-center">
+  <div class="container">
+    <span class="badge-tag">
+      <i class="bi bi-compass-fill me-1"></i> Your Personal Tech Career Navigator
+    </span>
+    
+    <h1 class="hero-title">
+      Find the Perfect Tech Career<br>
+      <span style="color: #60a5fa;">Tailored to Your Strengths</span>
+    </h1>
+
+    <p class="hero-subtitle">
+      Answer a few simple questions about your grades, interests, and hobbies to unlock customized tech career paths, university choices, and step-by-step learning roadmaps.
+    </p>
+
+    <div class="d-flex justify-content-center gap-3 flex-wrap">
+      <a href="{% url 'careers:assessment_step1' %}" class="btn btn-gradient-primary btn-lg">
+        Start Free Career Assessment <i class="bi bi-arrow-right ms-1"></i>
+      </a>
+      <a href="{% url 'careers:course_list' %}" class="btn btn-outline-light-custom btn-lg">
+        <i class="bi bi-compass me-1"></i> Explore Careers
+      </a>
+    </div>
+
+    <!-- Quick Stats Bar -->
+    <div class="row mt-5 pt-4 border-top border-secondary text-center">
+      <div class="col-md-4 mb-3 mb-md-0">
+        <h3 class="mb-0 text-white font-weight-bold">50+</h3>
+        <p class="text-muted small mb-0">Tech Career Paths</p>
+      </div>
+      <div class="col-md-4 mb-3 mb-md-0">
+        <h3 class="mb-0 text-white font-weight-bold">100%</h3>
+        <p class="text-muted small mb-0">Data-Driven Recommendations</p>
+      </div>
+      <div class="col-md-4">
+        <h3 class="mb-0 text-white font-weight-bold">5-Min</h3>
+        <p class="text-muted small mb-0">Interactive Assessment</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 2. HOW IT WORKS SECTION -->
+<section class="py-5 mt-4" id="how-it-works">
+  <div class="container text-center">
+    <span class="text-primary font-weight-bold text-uppercase small tracking-wide">Simple Process</span>
+    <h2 class="fw-bold mb-5 mt-1">How Tech Career Guide Works</h2>
+
+    <div class="row g-4">
+      <!-- Step 1 -->
+      <div class="col-md-4">
+        <div class="feature-card h-100">
+          <div class="icon-wrapper">
+            <i class="bi bi-person-badge"></i>
+          </div>
+          <h4 class="fw-bold h5">1. Share Your Profile</h4>
+          <p class="text-muted small mb-0">
+            Tell us about your background, subjects you excel at, and activities you enjoy in your free time.
+          </p>
+        </div>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="col-md-4">
+        <div class="feature-card h-100">
+          <div class="icon-wrapper">
+            <i class="bi bi-cpu"></i>
+          </div>
+          <h4 class="fw-bold h5">2. Smart Matching Engine</h4>
+          <p class="text-muted small mb-0">
+            Our recommendation algorithm processes your skills and hobbies against real-world tech industry requirements.
+          </p>
+        </div>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="col-md-4">
+        <div class="feature-card h-100">
+          <div class="icon-wrapper">
+            <i class="bi bi-map"></i>
+          </div>
+          <h4 class="fw-bold h5">3. Get Your Roadmap</h4>
+          <p class="text-muted small mb-0">
+            Receive matched careers, required skills, recommended degree courses, and structured learning roadmaps.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 3. FEATURED CAREERS PREVIEW -->
+{% if careers %}
+<section class="py-5 bg-light">
+  <div class="container">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <div>
+        <h2 class="fw-bold mb-0">Featured Career Paths</h2>
+        <p class="text-muted small mb-0">Explore popular high-demand technology roles</p>
+      </div>
+      <a href="{% url 'careers:course_list' %}" class="text-primary font-weight-bold text-decoration-none">
+        View All Careers &rarr;
+      </a>
+    </div>
+
+    <div class="row g-4">
+      {% for career in careers %}
+      <div class="col-md-4">
+        <div class="card h-100 border-0 shadow-sm p-3 rounded-4">
+          <div class="card-body">
+            <h5 class="card-title fw-bold text-dark">{{ career.title }}</h5>
+            <p class="card-text text-muted small">
+              {{ career.description|default:"Discover industry demands, average salaries, and skill paths for this role."|truncatewords:18 }}
+            </p>
+            <a href="{% url 'careers:career_detail' slug=career.slug %}" class="btn btn-sm btn-outline-primary rounded-pill px-3 mt-2">
+              Explore Path
+            </a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<!-- 4. CALL TO ACTION BANNER -->
+<section class="py-5 text-center">
+  <div class="container">
+    <div class="p-5 rounded-4" style="background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); color: white;">
+      <h2 class="fw-bold">Ready to Launch Your Tech Journey?</h2>
+      <p class="text-muted mb-4 mx-auto" style="max-width: 550px;">
+        Take the 5-minute assessment now to discover which technology careers match your core strengths.
+      </p>
+      <a href="{% url 'careers:assessment_step1' %}" class="btn btn-gradient-primary btn-lg">
+        Get Started Now
+      </a>
+    </div>
+  </div>
+</section>
+{% endblock %}

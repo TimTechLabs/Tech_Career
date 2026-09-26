@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <h2 class="text-center fw-bold">Step 2: Enter Your Grades</h2>
+            <p class="text-center text-muted">Select your grades for each subject.</p>
+
+            <form method="POST" action="">
+                {% csrf_token %}
+                <div class="row g-3 my-4">
+                    {% for subject in subjects %}
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label fw-semibold">{{ subject.name }}</label>
+                            <select name="subject_{{ subject.id }}" class="form-select" required>
+                                <option value="" selected disabled>Select Grade</option>
+                                {% for grade in grades %}
+                                    <option value="{{ grade.id }}">{{ grade.name }}</option>
+                                {% empty %}
+                                    <option value="" disabled>No grades configured in admin</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    {% empty %}
+                        <p class="text-center">No subjects found.</p>
+                    {% endfor %}
+                </div>
+
+                <div class="d-flex justify-content-between mt-4">
+                    <a href="{% url 'careers:assessment_step1' %}" class="btn btn-outline-secondary">← Back</a>
+                    <button type="submit" class="btn btn-primary">Continue to Step 3 →</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

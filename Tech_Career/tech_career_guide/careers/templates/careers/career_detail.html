@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container section">
+    <div class="career-header">
+        <span class="category-badge">{{ career.category }}</span>
+        <h1>{{ career.title }}</h1>
+        <p class="lead">{{ career.description }}</p>
+        <p><strong>Avg Salary:</strong> {{ career.average_salary }}</p>
+    </div>
+
+    <!-- 3-Section Layout / Tabs -->
+    <div class="career-content-grid">
+        
+        <!-- SECTION 1: Course Overview -->
+        <div class="card margin-bottom-md">
+            <h2>1. Course Overview</h2>
+            <h3>What Students Study</h3>
+            <p>{{ career.what_students_study }}</p>
+
+            <h3>Overview</h3>
+            <p>{{ career.overview }}</p>
+
+            <h3>Who This Suits</h3>
+            <p>{{ career.who_suits_course }}</p>
+
+            <h3>Key Required Skills</h3>
+            <div class="skills-tags">
+                {% for skill in skills %}
+                    <span class="skill-tag">{{ skill }}</span>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- SECTION 2: Career Information -->
+        <div class="card margin-bottom-md">
+            <h2>2. Career & Industry Information</h2>
+            <h3>Career Opportunities & Job Roles</h3>
+            <p><strong>Roles:</strong> {{ career.job_roles }}</p>
+            <p>{{ career.career_opportunities }}</p>
+
+            <h3>Practical Projects</h3>
+            <p>{{ career.practical_projects }}</p>
+
+            <h3>Tools & Technologies</h3>
+            <p>{{ career.tools_technologies }}</p>
+
+            <h3>Real-World Applications</h3>
+            <p>{{ career.real_world_apps }}</p>
+        </div>
+
+        <!-- SECTION 3: Visual Roadmap -->
+        <div class="card margin-bottom-md">
+            <h2>3. Learning Roadmap & Career Progression</h2>
+            {% if roadmap %}
+                <div class="timeline">
+                    {% for step in roadmap.steps.all %}
+                        <div class="timeline-step">
+                            <div class="timeline-badge">{{ step.order }}</div>
+                            <div class="timeline-content">
+                                <h4>{{ step.title }} <small>({{ step.get_level_display }})</small></h4>
+                                <p>{{ step.description }}</p>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p>Roadmap being updated by administrator.</p>
+            {% endif %}
+        </div>
+
+        <!-- Connected Universities & Courses -->
+        <div class="card">
+            <h2>Recommended University Programs</h2>
+            <ul>
+                {% for course in courses %}
+                    <li>
+                        <strong>{{ course.title }}</strong> - {{ course.school.name }}
+                        ({{ course.duration_years }} Years)
+                    </li>
+                {% empty %}
+                    <li>No course mappings available.</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}

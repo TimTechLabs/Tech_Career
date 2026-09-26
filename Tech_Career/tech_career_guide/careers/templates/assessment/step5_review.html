@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="text-center mb-5">
+        <h2 class="fw-bold">Your Assessment Results</h2>
+        <p class="text-muted">Based on your selections across all steps, here is your summary and career recommendations.</p>
+    </div>
+
+    <div class="row g-4">
+        <!-- Assessment Summary Sidebar -->
+        <div class="col-md-4">
+            <div class="card p-4 shadow-sm mb-4">
+                <h5 class="fw-bold mb-3"><i class="bi bi-journal-bookmark me-2"></i>Academic Grades</h5>
+                <ul class="list-group list-group-flush">
+                    {% for item in user_grades %}
+                        <li class="list-group-item d-flex justify-content-between px-0">
+                            <span>{{ item.subject }}</span>
+                            <span class="badge bg-primary rounded-pill">{{ item.grade }}</span>
+                        </li>
+                    {% empty %}
+                        <li class="list-group-item px-0 text-muted">No grades recorded.</li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <div class="card p-4 shadow-sm mb-4">
+                <h5 class="fw-bold mb-3"><i class="bi bi-lightbulb me-2"></i>Selected Interests</h5>
+                <div class="d-flex flex-wrap gap-2">
+                    {% for interest in selected_interests %}
+                        <span class="badge bg-secondary p-2">{{ interest.title }}</span>
+                    {% empty %}
+                        <p class="text-muted small mb-0">No interests selected.</p>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="card p-4 shadow-sm">
+                <h5 class="fw-bold mb-3"><i class="bi bi-controller me-2"></i>Selected Hobbies</h5>
+                <div class="d-flex flex-wrap gap-2">
+                    {% for hobby in selected_hobbies %}
+                        <span class="badge bg-info text-dark p-2">{{ hobby.title }}</span>
+                    {% empty %}
+                        <p class="text-muted small mb-0">No hobbies selected.</p>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <!-- Career Recommendations -->
+        <div class="col-md-8">
+            <h4 class="fw-bold mb-3">Recommended Careers</h4>
+            {% for career in recommended_careers %}
+                <div class="card p-4 shadow-sm mb-3">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h5 class="fw-bold mb-1">{{ career.title }}</h5>
+                        <span class="badge bg-success">Recommended Match</span>
+                    </div>
+                    <p class="text-muted mt-2 mb-3">{{ career.description }}</p>
+                    <a href="{% url 'careers:career_detail' career.id %}" class="btn btn-outline-primary btn-sm align-self-start">View Career Details →</a>
+                </div>
+            {% empty %}
+                <div class="alert alert-info text-center">
+                    No recommendations found. Ensure careers are added in Django Admin.
+                </div>
+            {% endfor %}
+
+            <div class="mt-4 text-center">
+                <a href="{% url 'careers:assessment_step1' %}" class="btn btn-outline-secondary">Retake Assessment</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

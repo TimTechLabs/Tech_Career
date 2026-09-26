@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block title %}Explore Careers | Tech Career Guide{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+  <div class="mb-4">
+    <h1 class="fw-bold text-dark h2 mb-2">Explore Tech Career Paths</h1>
+    <p class="text-muted">Browse high-demand tech roles, skill requirements, and study roadmaps.</p>
+  </div>
+
+  <div class="row g-4">
+    {% for course in courses %}
+      <div class="col-md-6 col-lg-4">
+        <div class="card-solid h-100 p-4 d-flex flex-column justify-content-between">
+          <div>
+            <div class="d-flex align-items-center justify-content-between mb-3">
+              <span class="badge bg-light text-primary border border-primary-subtle px-2.5 py-1">Role</span>
+              {% if course.avg_salary %}
+                <span class="text-muted small fw-semibold">${{ course.avg_salary }}</span>
+              {% endif %}
+            </div>
+            <h3 class="h5 fw-bold text-dark mb-2">{{ course.title }}</h3>
+            <p class="text-muted small mb-3">
+              {{ course.description|default:"Explore overview, required skills, and course details."|truncatewords:20 }}
+            </p>
+          </div>
+          <div>
+            <a href="{% url 'careers:career_detail' course.slug %}" class="btn-outline-custom w-100 justify-content-center">
+              Explore Path <i class="bi bi-chevron-right"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    {% empty %}
+      <div class="col-12">
+        <div class="card-solid p-5 text-center">
+          <i class="bi bi-folder-x fs-1 text-muted mb-2"></i>
+          <h4 class="fw-bold h5">No career paths found</h4>
+          <p class="text-muted small mb-0">Check back later or try completing the career assessment.</p>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

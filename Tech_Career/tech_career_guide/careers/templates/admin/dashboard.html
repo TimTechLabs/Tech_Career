@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container section">
+    <h1>Admin Analytics Dashboard</h1>
+    <p>Overview of student activity, career recommendations, and database entries.</p>
+
+    <!-- Stats Grid -->
+    <div class="stats-grid margin-bottom-lg">
+        <div class="stat-card">
+            <h3>{{ stats.total_students }}</h3>
+            <p>Total Students</p>
+        </div>
+        <div class="stat-card">
+            <h3>{{ stats.total_assessments }}</h3>
+            <p>Assessments Completed</p>
+        </div>
+        <div class="stat-card">
+            <h3>{{ stats.total_careers }}</h3>
+            <p>Active Careers</p>
+        </div>
+        <div class="stat-card">
+            <h3>{{ stats.total_courses }}</h3>
+            <p>Mapped Courses</p>
+        </div>
+        <div class="stat-card">
+            <h3>{{ stats.total_schools }}</h3>
+            <p>Partner Schools</p>
+        </div>
+    </div>
+
+    <div class="dashboard-tables-grid">
+        <!-- Top Recommended Careers -->
+        <div class="card">
+            <h3>Most Recommended Careers</h3>
+            <ul>
+                {% for item in stats.top_recommended %}
+                    <li>{{ item.career__title }} — {{ item.count }} times</li>
+                {% empty %}
+                    <li>No recommendations calculated yet.</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <!-- Popular Interests -->
+        <div class="card">
+            <h3>Top Student Interests</h3>
+            <ul>
+                {% for interest in stats.popular_interests %}
+                    <li>{{ interest.name }} ({{ interest.count }} students)</li>
+                {% empty %}
+                    <li>No interest data recorded.</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}

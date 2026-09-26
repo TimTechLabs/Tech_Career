@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <h2 class="text-center fw-bold mb-2">Step 3: What areas interest you?</h2>
+            <p class="text-center text-muted mb-4">Select all technical fields and topics you are passionate about.</p>
+
+            <form method="POST" action="">
+                {% csrf_token %}
+                <div class="row g-3 mb-4">
+                    {% for interest in interests %}
+                        <div class="col-md-6">
+                            <div class="card h-100 p-3 shadow-sm">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="interests" value="{{ interest.id }}" id="interest_{{ interest.id }}">
+                                    <label class="form-check-label fw-semibold" for="interest_{{ interest.id }}">
+                                        {{ interest.title }}
+                                    </label>
+                                    {% if interest.description %}
+                                        <p class="text-muted small mb-0 mt-1">{{ interest.description }}</p>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    {% empty %}
+                        <div class="col-12 text-center text-muted">No interests configured in Django Admin.</div>
+                    {% endfor %}
+                </div>
+
+                <div class="d-flex justify-content-between mt-4">
+                    <a href="{% url 'careers:assessment_step2' %}" class="btn btn-outline-secondary">← Back</a>
+                    <button type="submit" class="btn btn-primary">Continue to Step 4 →</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

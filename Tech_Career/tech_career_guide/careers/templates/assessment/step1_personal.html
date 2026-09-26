@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block title %}Step 1: Personal Profile{% endblock %}
+
+{% block content %}
+<div class="container my-5" style="max-width: 650px;">
+    <div class="card shadow-sm p-4 border-0 rounded-4">
+        <div class="text-center mb-4">
+            <div class="bg-light rounded-circle d-inline-flex p-3 mb-2">
+                <i class="bi bi-person-fill text-primary fs-2"></i>
+            </div>
+            <h3 class="fw-bold">Personal Profile</h3>
+            <p class="text-muted">Tell us a little about yourself to personalize your career recommendations.</p>
+        </div>
+
+        <form method="POST" action="{% url 'careers:assessment_step1' %}">
+            {% csrf_token %}
+            
+            <!-- Full Name Input -->
+            <div class="mb-3">
+                <label for="full_name" class="form-label fw-semibold">Full Name</label>
+                <div class="input-group">
+                    <span class="input-group-text bg-light"><i class="bi bi-person"></i></span>
+                    <input type="text" class="form-control" id="full_name" name="full_name" 
+                           placeholder="Enter your full name" 
+                           value="{{ request.session.full_name|default:'' }}" required>
+                </div>
+            </div>
+
+            <!-- Email Address Input -->
+            <div class="mb-3">
+                <label for="email" class="form-label fw-semibold">Email Address</label>
+                <div class="input-group">
+                    <span class="input-group-text bg-light"><i class="bi bi-envelope"></i></span>
+                    <input type="email" class="form-control" id="email" name="email" 
+                           placeholder="name@example.com" 
+                           value="{{ request.session.email|default:'' }}" required>
+                </div>
+            </div>
+
+            <!-- Education Level Selection -->
+            <div class="mb-4">
+                <label for="education_level" class="form-label fw-semibold">Education Level</label>
+                <div class="input-group">
+                    <span class="input-group-text bg-light"><i class="bi bi-mortarboard"></i></span>
+                    <select class="form-select" id="education_level" name="education_level" required>
+                        <option value="" disabled {% if not request.session.education_level %}selected{% endif %}>Select education level</option>
+                        <option value="High School" {% if request.session.education_level == 'High School' %}selected{% endif %}>High School</option>
+                        <option value="Undergraduate" {% if request.session.education_level == 'Undergraduate' %}selected{% endif %}>Undergraduate / College</option>
+                        <option value="Postgraduate" {% if request.session.education_level == 'Postgraduate' %}selected{% endif %}>Postgraduate</option>
+                        <option value="Other" {% if request.session.education_level == 'Other' %}selected{% endif %}>Other</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Navigation Button -->
+            <button type="submit" class="btn btn-primary w-100 py-2 fw-semibold rounded-3">
+                Next: Subject Grades <i class="bi bi-arrow-right ms-1"></i>
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}
