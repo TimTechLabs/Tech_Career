@@ -1,1 +1,1 @@
-{"version": 2, "builds": [{"src": "career_guidance/wsgi.py", "use": "@vercel/python"}], "routes": [{"src": "/(.*)", "dest": "career_guidance/wsgi.py"}]}
+{"routes": [{"src": "/(.*)", "dest": "api/index.py"}]}
