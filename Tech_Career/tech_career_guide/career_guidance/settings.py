@@ -19,7 +19,7 @@ SECRET_KEY = 'django-insecure-tech-career-guide-dev-key-change-in-production'
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
