@@ -1,15 +1,1 @@
-{
-  "version": 2,
-  "builds": [
-    {
-      "src": "tech_career_guide/wsgi.py",
-      "use": "@vercel/python"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "tech_career_guide/wsgi.py"
-    }
-  ]
-}
+{"version": 2, "builds": [{"src": "career_guidance/wsgi.py", "use": "@vercel/python"}], "routes": [{"src": "/(.*)", "dest": "career_guidance/wsgi.py"}]}
